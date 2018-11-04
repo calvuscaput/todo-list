@@ -8,6 +8,12 @@
     <link rel="stylesheet" href="<%=htmlWebpackPlugin.files.chunks.main.css %>">
 </head>
 <body>
+    <div class="add-task">
+        <input type="text" class="add_task__input">
+        <button class="add-task__btn">Add</button>
+    </div>
+    <ul class="task-list">
+    </ul>
     <script src="<%= htmlWebpackPlugin.files.chunks.main.entry %>"></script>
 </body>
 </html>
