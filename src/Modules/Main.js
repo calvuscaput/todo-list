@@ -3,9 +3,10 @@ class Main {
   constructor(selector){
     let btnAdd = document.querySelector(selector);
     btnAdd.addEventListener('click', () => this._addTaskElement());
+    this.remote = new Remote();
+    this.tasks = this.remote.getTasks();
+    this.updateList();
   }
-
-  tasks = [];
 
   _createTaskElement(taskText, checked) {
     let done = null;
@@ -34,13 +35,13 @@ class Main {
 
   _deleteTaskElement(index) {
     this._deleteTask(index);
-    this.updateList();
+    this.updateList(() => this.remote.setTasks(this.tasks));
     
   }
 
   _addTaskElement() {
       this._addTask(this._getNewTaskText())
-     this.updateList();
+     this.updateList(() => this.remote.setTasks(this.tasks));
   }
 
 
@@ -57,16 +58,13 @@ class Main {
     this._checkHandler(target);
   }
   _checkHandler(node) {
-    console.log(this.tasks);
-    
     let taskText = node.nextElementSibling.innerText;
-    this.tasks[this.tasks.findIndex(task => task.text === taskText)].check = node.checked;
-    console.log(this.tasks);
-    
+    this.tasks[this.tasks.findIndex(task => task.text === taskText)].check = node.checked;   
+    this.remote.setTasks(this.tasks)
     
   }
   updateList(remoteCallback) {
-    f = remoteCallback || (() => {});
+    let f = remoteCallback || (() => {});
     let listElement = document.querySelector('.task-list');
     listElement;
     listElement.innerHTML = '';
@@ -74,7 +72,7 @@ class Main {
       let taskElement = this._createTaskElement(task.text, task.check);
       listElement.appendChild(taskElement);
     });  
-    f();    
+    f(this.tasks);    
   }
 }
 
