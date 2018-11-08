@@ -1,19 +1,24 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Document</title>
-    <link rel="stylesheet" href="<%=htmlWebpackPlugin.files.chunks.main.css %>">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+  <link rel="stylesheet" href="<%=htmlWebpackPlugin.files.chunks.main.css %>">
 </head>
+
 <body>
+  <div class="container">
     <div class="add-task">
-        <input type="text" class="add_task__input">
-        <button class="add-task__btn">Add</button>
+      <input type="text" class="add-task__input">
+      <button class="btn btn-primary add-task__btn">Add</button>
     </div>
     <ul class="task-list">
     </ul>
-    <script src="<%= htmlWebpackPlugin.files.chunks.main.entry %>"></script>
+  </div>
+  <script src="<%= htmlWebpackPlugin.files.chunks.main.entry %>"></script>
 </body>
+
 </html>
