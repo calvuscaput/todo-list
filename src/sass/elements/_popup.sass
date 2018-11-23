@@ -1,0 +1,28 @@
+.popup 
+  position: fixed
+  left: 0
+  top: 0
+  width: 100%
+  height: 100%
+  background-color: rgba(0, 0, 0, 0.5) 
+  z-index: 100
+  text-align: center
+  transform: translateY(-100%)
+  transition: transform 0.3s
+  &.active
+    transform: translateY(0)
+    transition: transform 0.3s
+  &__text
+    text-transform: uppercase
+    display: inline-block
+    padding: 20px
+    border: 1px solid #cccccc
+    background-color: white
+    max-width: 70%
+    margin: auto
+    text-align: center
+    position: relative
+    margin: 0 auto
+    top: 50%
+    transform: translate(0, -50%)
+    z-index: 150

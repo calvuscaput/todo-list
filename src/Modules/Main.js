@@ -9,6 +9,24 @@ class Main {
     this.tasks = this.remote.getTasks();
     this.updateList();
   }
+
+  showPopup(message) {
+    const popUp = document.querySelector('.popup');
+    popUp.firstElementChild.innerText = message;
+    popUp.classList.add('active');
+    popUp.addEventListener('click', this.hidePopUp);
+    document.querySelector('.add-task__input').blur();
+    
+    
+  }
+
+  hidePopUp() {
+    const popUp = document.querySelector('.popup');
+    popUp.classList.remove('active');
+    popUp.removeEventListener('click', this.hidePopUp);
+    document.querySelector('.add-task__input').focus();
+  }
+
   //Отслеживание нажания клавиши Enter во время ввода текста
   _enterHandler(e) {
     e.key === 'Enter' ? this._addTaskElement() : () => {};
@@ -17,7 +35,7 @@ class Main {
   _checkHandler(e){ 
     let target = e.target;
     if (target.className != 'task__check' ) return;
-    //this._checkHandler(target);
+    
     let taskText = target.nextElementSibling.innerText;
     this.tasks[this.tasks.findIndex(task => task.text === taskText)].check = target.checked;   
     this.remote.setTasks(this.tasks)
@@ -48,8 +66,14 @@ class Main {
   }
   //Добавление нового элемента в DOM
   _addTaskElement() {
-    this.tasks.push({text: this._getNewTaskText(), checked: false})
-    this.updateList(() => this.remote.setTasks(this.tasks));
+    const taskText = this._getNewTaskText();
+    if (taskText) {
+      this.tasks.push({text: taskText, checked: false});
+      this.updateList(() => this.remote.setTasks(this.tasks));
+    } else {
+      this.showPopup('Add task text')
+    }
+    
   }
   //Удаление элемента из DOM
   _deleteTaskElement(text) {
@@ -63,8 +87,8 @@ class Main {
     let listElement = document.querySelector('.task-list');
     listElement.innerHTML = '';
     this.tasks.map((task) => {
-      let taskElement = this._createTaskElement(task.text, task.check);
-      listElement.appendChild(taskElement);
+    let taskElement = this._createTaskElement(task.text, task.check);
+    listElement.appendChild(taskElement);
     });  
     f(this.tasks);    
   }
