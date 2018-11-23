@@ -11,7 +11,7 @@ class Main {
   }
   //Отслеживание нажания клавиши Enter во время ввода текста
   _enterHandler(e) {
-    e.key == 'Enter' ? this._addTaskElement() : () => {};
+    e.key === 'Enter' ? this._addTaskElement() : () => {};
   }
   //Отслеживание checkbox
   _checkHandler(e){ 
