@@ -24,7 +24,7 @@ class Main {
     const popUp = document.querySelector('.popup');
     popUp.classList.remove('active');
     popUp.removeEventListener('click', this.hidePopUp);
-    document.querySelector('.add-task__input').focus();
+    document.querySelector('.add-task__input').blur();
   }
 
   //Отслеживание нажания клавиши Enter во время ввода текста
@@ -55,7 +55,7 @@ class Main {
     let inner =  `
       <input class="task__check" type="checkbox" ${done} name="tasck-check" id="task-check">
       <span class="task__text">${taskText}</span>
-      <button class="task__delete btn btn-danger">Del</button>
+      <button class="task__delete btn">Del</button>
             `
     let taskElement = document.createElement('li');
     taskElement.innerHTML = inner;
@@ -71,7 +71,7 @@ class Main {
       this.tasks.push({text: taskText, checked: false});
       this.updateList(() => this.remote.setTasks(this.tasks));
     } else {
-      this.showPopup('Add task text')
+      this.showPopup('Add some text to your task')
     }
     
   }

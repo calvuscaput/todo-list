@@ -5,10 +5,17 @@
     margin-bottom: 5px
     border-bottom: 2px solid #cccccc
     padding: 5px
+    &__delete
+        background-color: #dc3545
+        color: #fff
+        &:active
+            background-color: #DC0102
     &:last-child
         margin-bottom: 0
     &__text
         display: inline-block
         text-align: left
         flex: 1 0 50%
-        margin-left: 5px
+        margin-left: 10px
+    &__check:checked ~ &__text
+        text-decoration: line-through
