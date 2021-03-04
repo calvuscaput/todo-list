@@ -5,9 +5,13 @@ class Main {
     btnAdd.addEventListener('click', () => this._addTaskElement());
     let addTaskForm = document.querySelector('.add-task__input');
     addTaskForm.addEventListener('keypress', (event) => this._enterHandler(event));
-    this.remote = new Remote();
+    this.newMethod();
     this.tasks = this.remote.getTasks();
     this.updateList();
+  }
+
+  newMethod() {
+    this.remote = new Remote();
   }
 
   showPopup(message) {
